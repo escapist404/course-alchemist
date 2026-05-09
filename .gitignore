@@ -1,2 +1,11 @@
 runs/
 .DS_Store
+*.aux
+*.log
+*.out
+*.toc
+*.pdf
+__pycache__/
+*.pyc
+.test_tmp/
+test-output-process-scanned-textbook/

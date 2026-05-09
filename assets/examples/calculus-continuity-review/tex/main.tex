@@ -1,98 +1,12 @@
-\documentclass[UTF8,zihao=-4,scheme=chinese]{ctexart}
+\documentclass[UTF8,zihao=-4,scheme=chinese,fontset=windows]{ctexart}
 
-\usepackage[
-  a4paper,
-  left=1.55cm,
-  right=1.55cm,
-  top=1.65cm,
-  bottom=1.8cm,
-  headheight=14pt,
-  headsep=0.45cm,
-  footskip=0.85cm
-]{geometry}
-\usepackage{setspace}
-\setstretch{1.12}
-\setlength{\parindent}{2em}
-\setlength{\parskip}{0.25em}
+\input{../../../templates/course-alchemist-review.sty}
 
-\usepackage{amsmath,amssymb,mathtools,bm}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
-\usepackage{booktabs,array,tabularx}
-\usepackage{enumitem}
-\setlist[itemize]{leftmargin=2em,itemsep=0.15em,topsep=0.25em}
-\setlist[enumerate]{leftmargin=2.2em,itemsep=0.15em,topsep=0.25em}
-\usepackage[hidelinks]{hyperref}
-\hypersetup{pdftitle={高等数学连续性复习讲义}, pdfauthor={Course Alchemist}}
+\CASetCourseName{高等数学}
+\CASetLectureTitle{高等数学：连续性复习讲义}
+\CASetHeaderTitle{高等数学复习讲义}
 
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\small 高等数学复习讲义}
-\fancyhead[R]{\small \leftmark}
-\fancyfoot[C]{\small \thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0pt}
-
-\usepackage[most]{tcolorbox}
-\tcbuselibrary{breakable,skins,theorems}
-
-\definecolor{CAInk}{HTML}{1F2937}
-\definecolor{CASubtle}{HTML}{F8FAFC}
-\definecolor{CADef}{HTML}{2563EB}
-\definecolor{CAThm}{HTML}{7C3AED}
-\definecolor{CALem}{HTML}{0891B2}
-\definecolor{CAHint}{HTML}{059669}
-\definecolor{CAExam}{HTML}{D97706}
-\definecolor{CAPitfall}{HTML}{DC2626}
-\definecolor{CANote}{HTML}{475569}
-\definecolor{CAMethod}{HTML}{0F766E}
-\definecolor{CAExample}{HTML}{4F46E5}
-
-\tcbset{
-  ca-base/.style={
-    enhanced,
-    breakable,
-    sharp corners,
-    boxrule=0.6pt,
-    leftrule=2.4pt,
-    arc=1.2mm,
-    left=1.1mm,
-    right=1.1mm,
-    top=0.9mm,
-    bottom=0.9mm,
-    before skip=0.65em,
-    after skip=0.65em,
-    fonttitle=\bfseries,
-    coltitle=CAInk
-  }
-}
-
-\newtcbtheorem[number within=section]{definition}{定义}{ca-base,colback=CADef!5,colframe=CADef,colbacktitle=CADef!12}{def}
-\newtcbtheorem[number within=section]{theorem}{定理}{ca-base,colback=CAThm!5,colframe=CAThm,colbacktitle=CAThm!12}{thm}
-\newtcbtheorem[number within=section]{lemma}{引理}{ca-base,colback=CALem!5,colframe=CALem,colbacktitle=CALem!12}{lem}
-\newtcbtheorem[number within=section]{hint}{提示}{ca-base,colback=CAHint!5,colframe=CAHint,colbacktitle=CAHint!12}{hint}
-\newtcbtheorem[number within=section]{examspot}{考点}{ca-base,colback=CAExam!7,colframe=CAExam,colbacktitle=CAExam!14}{exam}
-\newtcbtheorem[number within=section]{pitfall}{易错点}{ca-base,colback=CAPitfall!5,colframe=CAPitfall,colbacktitle=CAPitfall!12}{pit}
-\newtcbtheorem[number within=section]{attention}{关注}{ca-base,colback=CANote!6,colframe=CANote,colbacktitle=CANote!14}{att}
-\newtcbtheorem[number within=section]{method}{方法}{ca-base,colback=CAMethod!5,colframe=CAMethod,colbacktitle=CAMethod!12}{mtd}
-\newtcbtheorem[number within=section]{example}{例题}{ca-base,colback=CAExample!5,colframe=CAExample,colbacktitle=CAExample!12}{ex}
-
-\newtcolorbox{solutionbox}[1][]{%
-  ca-base,
-  title={解答},
-  colback=CASubtle,
-  colframe=CAInk!55,
-  colbacktitle=CAInk!8,
-  #1
-}
-
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\dd}{\,\mathrm{d}}
-
-\title{\bfseries 高等数学：连续性复习讲义}
+\title{\bfseries \LectureTitle}
 \author{Course Alchemist 示例项目}
 \date{\today}
 

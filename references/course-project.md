@@ -103,6 +103,10 @@ review:
       location: sources/ch01-slides.pdf p.12
       issue: 分段函数题中参数符号疑似 OCR 错误
       status: open
+  confusion_audit:
+    - unit: ch01-continuity
+      status: covered
+      notes: 已覆盖连续性定义、分段函数分界点、介值定理条件和常见误用。
 ```
 
 更新规则：
@@ -110,6 +114,7 @@ review:
 - 每次增量更新后追加或更新 `progress.processed_units`。
 - 新增术语、符号、图形风格和题库标签时写入 `conventions` 或 `terms`。
 - 待核对事项写入 `review.open_items`，并在解决后把 `status` 改为 `resolved`。
+- 困惑点覆盖状态可写入 `review.confusion_audit`；长期项目每次新增章节后至少记录目标单元、覆盖状态和仍需追问的问题。
 - 只改与本次目标相关的状态，避免重写无关章节。
 
 ## Incremental Update Procedure
@@ -117,5 +122,6 @@ review:
 1. 读取 `course.yml` 和 `state.yml`。
 2. 浏览目标 `tex/` 文件，确认现有标题层级、环境用法、编号和符号。
 3. 处理新增材料，生成或更新对应章节、习题、答案、题库条目和核对清单。
-4. 更新 `state.yml` 的进度、术语、符号、题库统计和待核对事项。
-5. 编译或做 LaTeX 结构检查，最终报告改动文件和验证结果。
+4. 按 `references/confusion-audit.md` 对新增或修改章节做困惑点审计，补齐正文、例题、图示和易错点；未解决项写入 `review_notes/confusion-audit.md`。
+5. 更新 `state.yml` 的进度、术语、符号、题库统计、困惑审计状态和待核对事项。
+6. 编译或做 LaTeX 结构检查，最终报告改动文件、验证结果和困惑点覆盖结果。

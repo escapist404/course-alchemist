@@ -18,10 +18,17 @@
 2. 尝试文本抽取或 OCR，得到可复制文字和粗略公式。
 3. 视觉核对公式、图表、板书层次、题号和选项。
 4. 将定义、定理、例题、题干和解答重写为 LaTeX。
-5. 对无法确认的信息写入 `review_notes/`。
-6. 结合课程上下文补齐逻辑，使讲义自成一体。
+5. 按 `references/confusion-audit.md` 做困惑点审计，找出原材料一笔带过但学生可能卡住的定义展开、条件作用、推导跳步、图形直觉和方法触发点。
+6. 对无法确认的信息写入 `review_notes/`。
+7. 结合课程上下文补齐逻辑，使讲义自成一体。
 
 不要把 OCR 输出直接当成讲义正文。OCR 是素材，不是成品。
+
+实现入口：
+
+- 扫描版课本优先使用 `scripts/process_scanned_textbook.py` 生成结构化素材。
+- 组件、目录结构、page record schema 和验收标准见 `references/scanned-textbook-pipeline.md`。
+- 默认输出写入 `sources/processed/<source-stem>/`；若用户提供课程项目目录，可用 `--output` 指向该项目的 `sources/processed/` 子目录。
 
 ## TikZ and Figures
 
@@ -43,6 +50,16 @@
 - 图中 label 不得与曲线、箭头、面域、坐标轴重叠；重绘后要渲染抽查。
 - 图示关系必须正确：电场线、流线、等势线、轨迹、特征向量方向等不能出现与理论矛盾的交叉、方向或拓扑错误。
 
+## Confusion Pass
+
+生成或更新讲义时，必须在正文定稿前做一次困惑点补强检查：
+
+- 对每个主要概念块列出 3 到 8 个学生可能追问的问题，优先覆盖“定义为什么这样写”“条件有什么用”“这一步怎么算出来”“什么时候能用这个方法”“和相近概念有什么区别”。
+- 若原资料只有结论、公式或例题答案，不能照搬为讲义；要补上中间解释、方法触发点和至少一个边界提醒。
+- 若某个困惑点能通过图示解决，应并入 Figure Pass，一起补 TikZ/PGFPlots 图或清晰图注。
+- 若某个困惑点依赖源材料不清、图形方向不明或课程口径不同，写入 `review_notes/confusion-audit.md`，并在最终回复中说明。
+- 定稿后反向检查：从困惑点清单逐项追踪到正文位置。找不到对应位置的，继续补写。
+
 ## review_notes
 
 推荐文件：
@@ -50,6 +67,7 @@
 ```text
 review_notes/
 ├── uncertainties.md
+├── confusion-audit.md
 └── source-audit.md
 ```
 

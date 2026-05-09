@@ -12,9 +12,10 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 1. 判定用户目标：系统复习、冲刺训练、题库整理、试卷生成、增量更新，或这些模式的组合。
 2. 盘点输入材料：文字 PDF、扫描 PDF、PPT、课堂笔记、习题册、往年题、题目图片、已有课程项目目录或考试风格描述。
 3. 若用户提供已有课程项目，先读取 `course.yml`、`state.yml`、已有 `tex/`、`problem_bank/` 和 `review_notes/`，延续术语、符号、编号、题库标签和模板。
-4. 生成或更新中文 `ctex` LaTeX 产物：讲义优先，按需附习题、解析、题库条目和模拟卷。
-5. 对公式、OCR、图像、缺页、题意不确定处写入 `review_notes/`，不要把核对噪声塞进正文。
-6. 尽量编译或做结构检查；最终说明产物路径、验证结果和仍需人工核对的事项。
+4. 先为目标章节生成“学生困惑审计”：列出最小知识点、隐含前置概念、常见跳步、容易被老师一笔带过的问题，并据此追问或回填讲义。系统复习、增量更新和题库讲解都必须执行这一步。
+5. 生成或更新中文 `ctex` LaTeX 产物：讲义优先，按需附习题、解析、题库条目和模拟卷。
+6. 对公式、OCR、图像、缺页、题意不确定处写入 `review_notes/`，不要把核对噪声塞进正文。
+7. 尽量编译或做结构检查；最终说明产物路径、验证结果、困惑审计覆盖结果和仍需人工核对的事项。
 
 ## Mode Selection
 
@@ -39,6 +40,7 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 按需读取这些文件，不要一次性加载全部：
 
 - `references/course-project.md`：创建或维护课程项目目录、`course.yml`、`state.yml` 时读取。
+- `references/confusion-audit.md`：生成或更新讲义、例题解析、题库讲解时读取，用于强制检查学生困惑点是否被覆盖。
 - `references/problem-bank.md`：建立题库、抽题、组卷、标注题目元数据时读取。
 - `references/source-processing.md`：处理 PDF、扫描件、PPT、题目照片、往年题或 TikZ 重绘时读取。
 - `references/example-tasks.md`：需要判断典型请求应走哪种模式、输出什么、如何验收时读取。
@@ -46,6 +48,9 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 ## Quality Bar
 
 - 正文应自成一体，补齐必要定义、定理条件、推导步骤、例题方法和考试触发点。
+- “系统性”必须体现为足够细的基础铺垫：每个主要概念块都要能回答“它是什么、为什么需要这些条件、从哪里来、怎么用、学生会卡在哪里、卡住时先看哪一步”。
+- 不能默认读者已经理解教师或模型容易跳过的中间知识。若一个结论依赖定义展开、符号约定、代数变形、几何直觉、单位量纲、极限/积分/线性代数前置事实，应在正文或例题解析中显式交代。
+- 讲义生成后必须做困惑点覆盖检查：把预设困惑清单逐项映射到定义、解释、例题、图示、易错点或练习；没有覆盖的项补入正文，仍依赖用户材料确认的项写入 `review_notes/confusion-audit.md`。
 - 不在正文反复标注“来自课件”“来自参考书”“模型补充”等来源差异；不确定性进入 `review_notes/`。
 - 术语、符号、编号、图形风格、题库标签和难度标准保持一致。
 - 物理讲义不能只堆公式；受力、场线、通量、高斯面、等势面、坐标系、线性变换、曲面/区域等关键空间关系应有足够图示支撑。
