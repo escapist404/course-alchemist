@@ -1,0 +1,118 @@
+\documentclass[UTF8,zihao=-4,scheme=chinese]{ctexart}
+
+\usepackage[
+  a4paper,
+  left=1.55cm,
+  right=1.55cm,
+  top=1.65cm,
+  bottom=1.8cm,
+  headheight=14pt,
+  headsep=0.45cm,
+  footskip=0.85cm
+]{geometry}
+\usepackage{setspace}
+\setstretch{1.12}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\setlist[enumerate]{leftmargin=2.2em,itemsep=0.2em,topsep=0.25em}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small 高等数学模拟卷}
+\fancyhead[R]{\small 连续性专题}
+\fancyfoot[C]{\small \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\definecolor{CAInk}{HTML}{1F2937}
+\definecolor{CASubtle}{HTML}{F8FAFC}
+\tcbset{
+  ca-base/.style={
+    enhanced,
+    breakable,
+    sharp corners,
+    boxrule=0.6pt,
+    leftrule=2.4pt,
+    arc=1.2mm,
+    left=1.1mm,
+    right=1.1mm,
+    top=0.9mm,
+    bottom=0.9mm,
+    before skip=0.65em,
+    after skip=0.65em,
+    fonttitle=\bfseries,
+    coltitle=CAInk
+  }
+}
+\newtcolorbox{solutionbox}[1][]{%
+  ca-base,
+  title={解答},
+  colback=CASubtle,
+  colframe=CAInk!55,
+  colbacktitle=CAInk!8,
+  #1
+}
+
+\title{\bfseries 高等数学连续性专题模拟卷}
+\author{Course Alchemist 示例项目}
+\date{时间：45 分钟 \qquad 满分：30 分}
+
+\begin{document}
+
+\maketitle
+
+\section*{试题}
+
+\begin{enumerate}
+  \item（6 分）设
+  \[
+    f(x)=
+    \begin{cases}
+      x^2+c, & x<0,\\
+      2x+1, & x\ge 0.
+    \end{cases}
+  \]
+  求 $c$，使 $f$ 在 $x=0$ 处连续。
+
+  \item（8 分）证明方程 $x^3+x-1=0$ 在区间 $(0,1)$ 内至少有一个实根。
+
+  \item（8 分）设 $f$ 在 $[0,2]$ 上连续，且 $f(0)=1$，$f(2)=5$。证明存在 $\xi\in(0,2)$，使得 $f(\xi)=3$。
+
+  \item（8 分）设 $f$ 在 $[0,1]$ 上连续，且 $0\le f(x)\le 1$。证明存在 $\xi\in[0,1]$，使得 $f(\xi)=\xi$。
+\end{enumerate}
+
+\section*{参考答案}
+
+\begin{solutionbox}[title={第 1 题}]
+连续要求
+\[
+  \lim_{x\to0^-}(x^2+c)=f(0).
+\]
+左极限为 $c$，而 $f(0)=1$，所以 $c=1$。
+\end{solutionbox}
+
+\begin{solutionbox}[title={第 2 题}]
+令 $g(x)=x^3+x-1$。函数 $g$ 在 $[0,1]$ 上连续，且
+\[
+  g(0)=-1<0,\qquad g(1)=1>0.
+\]
+由零点存在定理，存在 $\xi\in(0,1)$，使得 $g(\xi)=0$。
+\end{solutionbox}
+
+\begin{solutionbox}[title={第 3 题}]
+因为 $f$ 在 $[0,2]$ 上连续，且 $3$ 介于 $f(0)=1$ 与 $f(2)=5$ 之间，所以由介值定理，存在 $\xi\in(0,2)$，使得 $f(\xi)=3$。
+\end{solutionbox}
+
+\begin{solutionbox}[title={第 4 题}]
+令 $g(x)=f(x)-x$。则 $g$ 在 $[0,1]$ 上连续，且
+\[
+  g(0)=f(0)\ge0,\qquad g(1)=f(1)-1\le0.
+\]
+若端点处 $g=0$，结论立即成立；否则由介值定理可得存在 $\xi\in(0,1)$，使得 $g(\xi)=0$，即 $f(\xi)=\xi$。
+\end{solutionbox}
+
+\end{document}

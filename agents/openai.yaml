@@ -1,0 +1,7 @@
+interface:
+  display_name: "Course Alchemist"
+  short_description: "将理工科资料炼成 LaTeX 讲义与试卷"
+  default_prompt: "Use $course-alchemist to turn my STEM course materials into Chinese LaTeX review notes and practice exams."
+
+policy:
+  allow_implicit_invocation: true

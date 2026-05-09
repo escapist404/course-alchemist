@@ -1,0 +1,25 @@
+\section{练习解析}
+
+\begin{solutionbox}[title={第 1 题}]
+连续要求分界点处左极限与函数值相等。由
+\[
+  \lim_{x\to 1^-}(ax+1)=a+1,\qquad f(1)=1+b
+\]
+可得 $a+1=1+b$，所以 $a=b$。
+\end{solutionbox}
+
+\begin{solutionbox}[title={第 2 题}]
+因为 $f$ 在闭区间 $[0,1]$ 上连续，且 $f(0)<0<f(1)$，所以 $0$ 介于 $f(0)$ 与 $f(1)$ 之间。由介值定理，存在 $\xi\in(0,1)$，使得 $f(\xi)=0$。
+\end{solutionbox}
+
+\begin{solutionbox}[title={第 3 题}]
+令 $g(x)=f(x)-x$。由于 $f$ 连续，$g$ 在 $[0,1]$ 上连续。又因为 $0\le f(0)\le1$，所以
+\[
+  g(0)=f(0)\ge0.
+\]
+同时 $0\le f(1)\le1$，所以
+\[
+  g(1)=f(1)-1\le0.
+\]
+若端点已有 $g(0)=0$ 或 $g(1)=0$，结论成立；否则由介值定理，存在 $\xi\in(0,1)$ 使 $g(\xi)=0$，即 $f(\xi)=\xi$。
+\end{solutionbox}

@@ -1,0 +1,37 @@
+progress:
+  processed_units:
+    - id: ch01-continuity
+      title: 函数的连续性
+      outputs:
+        - tex/main.tex
+        - tex/problems.tex
+        - tex/solutions.tex
+        - tex/exams/mock-01.tex
+      source_refs:
+        - generated-example
+  pending_units: []
+conventions:
+  notation:
+    R: "\\mathbb{R}"
+    dx: "\\,\\mathrm{d}x"
+  theorem_numbering: within_section
+  figure_style: tikz_pgplots_clean
+terms:
+  连续: 函数值等于极限值
+  间断点: 函数在某点不满足连续条件
+problem_bank:
+  difficulty_labels:
+    - 基础掌握
+    - 考试常规
+    - 拔高区分
+  type_labels:
+    - 计算
+    - 证明
+    - 填空
+    - 综合
+review:
+  open_items:
+    - id: review-example-001
+      location: generated-example
+      issue: 示例项目没有真实来源材料，后续试跑真实课程时需替换为实际 source refs。
+      status: open

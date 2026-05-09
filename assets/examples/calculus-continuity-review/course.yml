@@ -1,0 +1,21 @@
+course:
+  name: 高等数学
+  audience: 理工科本科生
+  language: zh-CN
+  scope:
+    - 函数、极限与连续
+  source_types:
+    - generated_example
+  default_mode: 系统复习
+  output:
+    latex_engine: tectonic
+    template: assets/templates/ctex-review-template.tex
+    figure_policy: tikz_first
+exam_style:
+  total_score: 100
+  duration_minutes: 120
+  difficulty_mix:
+    基础掌握: 0.3
+    考试常规: 0.5
+    拔高区分: 0.2
+  notes: 示例项目使用常见高等数学期末风格。

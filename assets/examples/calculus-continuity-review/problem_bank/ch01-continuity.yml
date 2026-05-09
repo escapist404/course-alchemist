@@ -1,0 +1,57 @@
+- id: calc-cont-001
+  course: 高等数学
+  unit: ch01-continuity
+  topics:
+    - 连续定义
+    - 左右极限
+  difficulty: 基础掌握
+  type: 计算
+  source:
+    kind: generated
+    ref: course-alchemist-example
+  style_tags:
+    - 分段函数
+    - 参数确定
+  statement_tex: |
+    设
+    \[
+      f(x)=\begin{cases}
+      ax+1, & x<1,\\
+      x^2+b, & x\ge 1.
+      \end{cases}
+    \]
+    若 $f$ 在 $x=1$ 处连续，求 $a,b$ 的关系。
+  solution_tex: |
+    连续要求左极限、右极限与函数值一致。由
+    \[
+      \lim_{x\to1^-}(ax+1)=a+1,\qquad f(1)=1+b
+    \]
+    得 $a+1=1+b$，即 $a=b$。
+  answer: "$a=b$"
+  estimated_time_minutes: 4
+  score: 6
+  related_notes:
+    - tex/main.tex
+- id: calc-cont-002
+  course: 高等数学
+  unit: ch01-continuity
+  topics:
+    - 零点存在
+    - 介值定理
+  difficulty: 考试常规
+  type: 证明
+  source:
+    kind: generated
+    ref: course-alchemist-example
+  style_tags:
+    - 存在性证明
+    - 辅助函数
+  statement_tex: |
+    设 $f$ 在 $[0,1]$ 上连续，且 $f(0)<0<f(1)$。证明存在 $\xi\in(0,1)$，使得 $f(\xi)=0$。
+  solution_tex: |
+    由介值定理，$0$ 介于 $f(0)$ 与 $f(1)$ 之间，因此存在 $\xi\in(0,1)$ 使 $f(\xi)=0$。
+  answer: 存在
+  estimated_time_minutes: 5
+  score: 8
+  related_notes:
+    - tex/main.tex
