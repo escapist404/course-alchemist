@@ -1,0 +1,32 @@
+\begin{tikzpicture}[>=Latex, scale=0.92]
+  \path[use as bounding box] (-1.5,-1.75) rectangle (8.55,3.55);
+  \begin{scope}[shift={(0,0)}]
+    \foreach \i in {-1,0,1,2} {
+      \draw[CAInk!18] (-1,\i) -- (2,\i);
+      \draw[CAInk!18] (\i,-1) -- (\i,2);
+    }
+    \draw[->, CAInk!55] (-1.1,0) -- (2.15,0);
+    \draw[->, CAInk!55] (0,-1.1) -- (0,2.15);
+    \draw[->, CADef, very thick] (0,0) -- (1,0) node[below] {$e_1$};
+    \draw[->, CAExam, very thick] (0,0) -- (0,1) node[left] {$e_2$};
+    \node at (0.5,-1.45) {original};
+  \end{scope}
+
+  \draw[->, CAInk!70, thick] (2.65,0.5) -- (3.65,0.5) node[midway, above] {$A$};
+
+  \begin{scope}[shift={(5.0,0)}]
+    \coordinate (u) at (1.25,0.35);
+    \coordinate (v) at (0.35,1.25);
+    \draw[CAInk!18] (-1.60,-1.60) -- (2.15,-0.55);
+    \draw[CAInk!18] (-1.25,-0.35) -- (2.50,0.70);
+    \draw[CAInk!18] (-0.90,0.90) -- (2.85,1.95);
+    \draw[CAInk!18] (-0.55,2.15) -- (3.20,3.20);
+    \draw[CAInk!18] (-1.60,-1.60) -- (-0.55,2.15);
+    \draw[CAInk!18] (-0.35,-1.25) -- (0.70,2.50);
+    \draw[CAInk!18] (0.90,-0.90) -- (1.95,2.85);
+    \draw[CAInk!18] (2.15,-0.55) -- (3.20,3.20);
+    \draw[->, CADef, very thick] (0,0) -- (u) node[below right] {$Ae_1$};
+    \draw[->, CAExam, very thick] (0,0) -- (v) node[above left] {$Ae_2$};
+    \node at (0.85,-1.45) {transformed};
+  \end{scope}
+\end{tikzpicture}

@@ -9,7 +9,7 @@
 - 本地 OCR：优先使用 Tesseract + `pytesseract`，输出正文候选和置信度。OCR 输出只作为素材，不直接进入最终讲义。
 - 版面分析：初版使用保守启发式，将整页作为可追溯 block；后续可替换为 PaddleOCR、doclayout-yolo、surya 或同类 layout detector。
 - 公式识别：初版将疑似公式 block 标记为 `needs_vision_review`，后续可接入 pix2tex、Mathpix、Nougat/LaTeX-OCR 或多模态模型。
-- 图表处理：图形、表格和低置信度区域默认进入视觉 QA 或 TikZ/PGFPlots 重绘队列。
+- 图表处理：图形、表格和低置信度区域默认进入视觉 QA；数学和物理标准示意图进入 TikZ/SVG 重绘候选队列，复杂或不确定图保留裁剪并写入核对清单。
 - 视觉 QA：多模态模型用于复核公式、图形、复杂版面、跨页内容和低置信度 OCR。
 
 ## Output Layout
@@ -93,5 +93,5 @@ python scripts/process_scanned_textbook.py sources/textbook.pdf --expected-pages
 - 每页都有可追溯的 page record。
 - 所有 block 都有 `source_ref`、`bbox`、`confidence` 和 `needs_vision_review`。
 - 展示公式不直接当成正文，必须保留 LaTeX 候选和视觉复核标记。
-- 图形不被强行 OCR 成普通段落；无法确认时保留裁剪或进入重绘队列。
+- 图形不被强行 OCR 成普通段落；标准示意图优先进入 TikZ/SVG 重绘候选队列，无法确认关系时保留裁剪并写入 `review_notes/figure-audit.md`。
 - 不确定项写入 `review_notes/source-audit.md`，最终讲义正文不堆叠 OCR 噪声。

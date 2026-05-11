@@ -359,7 +359,7 @@ def write_chapter_assets(output_root: Path, source: Path, page_records: list[Pag
             elif block.type == "exercise":
                 chapter["exercises"].append(item)
             elif block.type == "figure":
-                chapter["figures"].append(item | {"redraw_policy": "tikz_pgplots_first"})
+                chapter["figures"].append(item | {"review_policy": "visual_qa_required"})
             elif block.needs_vision_review:
                 chapter["review_items"].append(item)
 

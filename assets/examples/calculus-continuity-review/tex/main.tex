@@ -82,21 +82,6 @@ x^2+b, & x\ge 1.
 存在性证明常把目标方程改写为 $g(x)=0$。先构造连续函数 $g$，再检查端点符号或中间值条件。
 \end{hint}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.95]
-  \draw[-{Latex}] (-0.2,0) -- (5.2,0) node[right] {$x$};
-  \draw[-{Latex}] (0,-1.4) -- (0,2.2) node[above] {$y$};
-  \draw[thick,CAExample,domain=0.4:4.6,smooth,samples=80] plot (\x,{0.25*(\x-1.2)*(\x-4)+0.2});
-  \draw[dashed] (0.4,0) node[below] {$a$} -- (0.4,{0.25*(0.4-1.2)*(0.4-4)+0.2});
-  \draw[dashed] (4.6,0) node[below] {$b$} -- (4.6,{0.25*(4.6-1.2)*(4.6-4)+0.2});
-  \draw[dashed] (2.15,0) node[below] {$\xi$} -- (2.15,{0.25*(2.15-1.2)*(2.15-4)+0.2});
-  \node[left] at (0,{0.25*(0.4-1.2)*(0.4-4)+0.2}) {$f(a)$};
-  \node[left] at (0,{0.25*(4.6-1.2)*(4.6-4)+0.2}) {$f(b)$};
-\end{tikzpicture}
-\caption{连续曲线从负值到正值时必须穿过零点。}
-\end{figure}
-
 \begin{pitfall}{忽略闭区间连续性}{ivt-pitfall}
 介值定理要求函数在整个闭区间上连续。只知道端点函数值异号，但函数中间有断点，不能直接推出零点存在。
 \end{pitfall}

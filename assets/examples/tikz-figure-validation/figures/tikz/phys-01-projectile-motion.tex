@@ -1,0 +1,21 @@
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \path[use as bounding box] (-0.45,-0.45) rectangle (6.35,2.25);
+  \draw[CAInk!70, thick] (-0.2,0) -- (5.6,0);
+  \node[CAInk!70] at (5.92,0.16) {ground};
+  \draw[CADef, thick, domain=0:5.0, samples=80]
+    plot (\x,{0.92*\x-0.18*\x*\x});
+
+  \coordinate (O) at (0.35,0);
+  \draw[->, CAExam, very thick] (O) -- ++(1.35,1.10) node[pos=0.62, above left] {$v_0$};
+  \draw[->, CADef, thick] (O) -- ++(1.35,0) node[below] {$v_{0x}$};
+  \draw[->, CADef, thick] (O) -- ++(0,1.1) node[left] {$v_{0y}$};
+  \draw[CAInk!45, dashed] (1.7,0) -- (1.7,1.10) -- (0.35,1.10);
+
+  \foreach \x in {1.4,2.8,4.15} {
+    \draw[->, CAExam, thick] (\x,{0.92*\x-0.18*\x*\x+0.55}) -- ++(0,-0.55);
+  }
+  \node[CAExam, fill=white, inner sep=1pt] at (4.43,0.78) {$g$};
+
+  \fill[CADef] (O) circle (1.6pt);
+  \node[CAInk!70, fill=white, inner sep=1pt] at (3.45,1.36) {trajectory};
+\end{tikzpicture}

@@ -1,0 +1,27 @@
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \path[use as bounding box] (-0.55,-0.55) rectangle (4.55,3.12);
+  \draw[->, CAInk!70] (-0.25,0) -- (3.65,0);
+  \node[CAInk!70] at (3.82,-0.12) {$x$};
+  \draw[->, CAInk!70] (0,-0.2) -- (0,2.45);
+  \node[CAInk!70] at (-0.12,2.62) {$y$};
+
+  \draw[CAInk!80, thick, domain=0.15:3.35, samples=80]
+    plot (\x,{0.35*(\x-0.4)^2+0.3});
+
+  \coordinate (P) at (1.4,0.65);
+  \coordinate (Q) at (2.55,1.9179);
+  \coordinate (Px) at (1.4,0);
+  \coordinate (Qx) at (2.55,0);
+
+  \draw[CADef, thick] (0.25,-0.155) -- (3.25,1.945);
+  \node[CADef, fill=white, inner sep=1pt, anchor=west] at (2.68,1.36) {tangent};
+  \draw[CAExam, thick] (0.75,-0.0666) -- (3.05,2.4691);
+  \node[CAExam, fill=white, inner sep=1pt, anchor=west] at (3.08,2.54) {secant};
+
+  \fill[CADef] (P) circle (1.8pt) node[above left] {$P$};
+  \fill[CAExam] (Q) circle (1.8pt) node[above left] {$Q$};
+
+  \draw[CAInk!45, dashed] (P) -- (Px);
+  \draw[CAInk!45, dashed] (Q) -- (Qx);
+  \draw[<->, CADef, thick] (1.4,-0.18) -- (2.55,-0.18) node[midway, below] {$\Delta x$};
+\end{tikzpicture}

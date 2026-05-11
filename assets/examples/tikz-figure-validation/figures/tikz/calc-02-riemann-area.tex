@@ -1,0 +1,22 @@
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \path[use as bounding box] (-0.45,-0.4) rectangle (4.75,2.85);
+  \draw[->, CAInk!70] (-0.2,0) -- (4.15,0);
+  \node[CAInk!70] at (4.32,-0.12) {$x$};
+  \draw[->, CAInk!70] (0,-0.15) -- (0,2.55);
+  \node[CAInk!70] at (-0.12,2.7) {$y$};
+
+  \fill[CADef!12]
+    (0.6,0) -- plot[domain=0.6:3.5, samples=80] (\x,{0.45+0.45*sin(75*\x)+0.24*\x}) -- (3.5,0) -- cycle;
+
+  \foreach \x/\h in {0.6/0.9122,1.18/1.1830,1.76/1.2068,2.34/1.0469,2.92/0.8676} {
+    \draw[fill=CAExam!18, draw=CAExam!70] (\x,0) rectangle ++(0.58,\h);
+  }
+
+  \draw[CADef, thick, domain=0.45:3.72, samples=100]
+    plot (\x,{0.45+0.45*sin(75*\x)+0.24*\x});
+  \node[CADef] at (3.9,1.52) {$f(x)$};
+
+  \draw[CAInk!60] (0.6,0.06) -- (0.6,-0.06) node[below] {$a$};
+  \draw[CAInk!60] (3.5,0.06) -- (3.5,-0.06) node[below] {$b$};
+  \node[CADef] at (2.1,0.43) {$\int_a^b f(x)\,dx$};
+\end{tikzpicture}

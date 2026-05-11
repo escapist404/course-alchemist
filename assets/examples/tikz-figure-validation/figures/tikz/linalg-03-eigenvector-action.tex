@@ -1,0 +1,22 @@
+\begin{tikzpicture}[>=Latex, scale=0.95]
+  \path[use as bounding box] (-0.75,-1.15) rectangle (7.95,2.15);
+  \begin{scope}[shift={(0,0)}]
+    \draw[CAInk!45, ->] (-0.4,0) -- (2.3,0);
+    \draw[CAInk!45, ->] (0,-0.45) -- (0,1.85);
+    \draw[CAInk!25, dashed] (-0.3,-0.15) -- (2.2,1.1);
+    \draw[->, CADef, very thick] (0,0) -- (1.4,0.7) node[above] {$v$};
+    \draw[->, CAExam, very thick] (0,0) -- (0.75,1.35) node[left] {$w$};
+    \node at (0.95,-0.85) {before};
+  \end{scope}
+
+  \draw[->, CAInk!70, thick] (2.75,0.55) -- (3.7,0.55) node[midway, above] {$A$};
+
+  \begin{scope}[shift={(4.5,0)}]
+    \draw[CAInk!45, ->] (-0.4,0) -- (2.9,0);
+    \draw[CAInk!45, ->] (0,-0.45) -- (0,1.85);
+    \draw[CAInk!25, dashed] (-0.3,-0.15) -- (2.8,1.4);
+    \draw[->, CADef, very thick] (0,0) -- (2.4,1.2) node[above] {$Av=\lambda v$};
+    \draw[->, CAExam, very thick] (0,0) -- (1.55,0.35) node[above right] {$Aw$};
+    \node at (1.15,-0.85) {after};
+  \end{scope}
+\end{tikzpicture}

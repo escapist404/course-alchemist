@@ -17,10 +17,19 @@
 │   ├── solutions.tex
 │   └── exams/
 ├── figures/
-├── tikz/
+│   ├── tikz/
+│   └── svg/
+├── build/
+│   └── tikz/
 ├── sources/
+├── source/
+│   └── figure-ir.json
 ├── problem_bank/
 └── review_notes/
+    ├── uncertainties.md
+    ├── confusion-audit.md
+    ├── figure-audit.md
+    └── source-audit.md
 ```
 
 一次性任务可以只生成 `main.tex`、`problems.tex`、`solutions.tex` 和 PDF；长期项目应保留 YAML 状态文件。
@@ -61,6 +70,7 @@ exam_style:
 - `course.scope`：当前项目覆盖范围，可以是章节、专题或考试范围。
 - `course.source_types`：材料类型枚举，允许 `text_pdf`、`scanned_pdf`、`lecture_slides`、`textbook`、`notes`、`exercise_set`、`past_exams`、`images`。
 - `course.output.template`：默认模板路径；用户提供模板时以用户模板为准。
+- `course.output.figure_policy`：默认 `tikz_first`，即数学和物理标准示意图先尝试 TikZ/PGFPlots 生成静态 SVG；复杂、低清或关系不确定的源图保留原图并进入 `review_notes/figure-audit.md`。
 - `exam_style`：默认组卷规则；用户临时指定时覆盖本文件。
 
 ## state.yml
@@ -113,6 +123,8 @@ review:
 
 - 每次增量更新后追加或更新 `progress.processed_units`。
 - 新增术语、符号、图形风格和题库标签时写入 `conventions` 或 `terms`。
+- 新增 TikZ 图时，源片段放入 `figures/tikz/`，验收后的 SVG 放入 `figures/svg/`，并把验证报告保留在 `build/tikz/`。
+- 生成 TikZ 图前先写 `source/figure-ir.json`，记录每张图的教学目的、对象、必要语义关系、禁止关系和可检查证据。
 - 待核对事项写入 `review.open_items`，并在解决后把 `status` 改为 `resolved`。
 - 困惑点覆盖状态可写入 `review.confusion_audit`；长期项目每次新增章节后至少记录目标单元、覆盖状态和仍需追问的问题。
 - 只改与本次目标相关的状态，避免重写无关章节。
@@ -123,5 +135,6 @@ review:
 2. 浏览目标 `tex/` 文件，确认现有标题层级、环境用法、编号和符号。
 3. 处理新增材料，生成或更新对应章节、习题、答案、题库条目和核对清单。
 4. 按 `references/confusion-audit.md` 对新增或修改章节做困惑点审计，补齐正文、例题、图示和易错点；未解决项写入 `review_notes/confusion-audit.md`。
-5. 更新 `state.yml` 的进度、术语、符号、题库统计、困惑审计状态和待核对事项。
-6. 编译或做 LaTeX 结构检查，最终报告改动文件、验证结果和困惑点覆盖结果。
+5. 对新增或引用的图示做 TikZ/SVG 验证和人工核对；把无法确认的方向、标签遮挡、源图歧义写入 `review_notes/figure-audit.md`。
+6. 更新 `state.yml` 的进度、术语、符号、题库统计、困惑审计状态和待核对事项。
+7. 编译或做 LaTeX 结构检查，最终报告改动文件、验证结果、图像核对事项和困惑点覆盖结果。

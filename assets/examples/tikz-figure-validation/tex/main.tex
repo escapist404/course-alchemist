@@ -1,0 +1,96 @@
+\documentclass[UTF8,zihao=-4,fontset=fandol]{ctexart}
+
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,intersections,decorations.pathmorphing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{CAInk}{HTML}{1F2937}
+\definecolor{CADef}{HTML}{2563EB}
+\definecolor{CAExam}{HTML}{D97706}
+
+\captionsetup{font=small,labelfont=bf}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+
+\newcommand{\FigureSourceRoot}{../figures/tikz}
+\newcommand{\TikzValidationFigure}[3]{%
+  \begin{figure}[htbp]
+    \centering
+    \input{\FigureSourceRoot/#1.tex}
+    \caption{#2}
+    \label{fig:#1}
+  \end{figure}
+  \noindent\textbf{检查要点：}#3\par
+}
+
+\title{TikZ 图示嵌入 LaTeX 检查稿}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{说明}
+
+本文档使用原生 \verb|ctexart| 文档类，直接嵌入本样例目录 \verb|figures/tikz| 中的 TikZ 源片段。本文不引用 SVG，也不加载 Course Alchemist 的自定义讲义样式；仅在导言区定义 TikZ 图中使用的三个颜色名。
+
+\section{微积分}
+
+\TikzValidationFigure
+  {calc-01-derivative-tangent}
+  {割线斜率随点 $Q$ 靠近点 $P$ 而趋近于点 $P$ 处的切线斜率。}
+  {确认 $P,Q$ 均位于曲线上，割线经过两点，切线在 $P$ 附近贴近曲线，$\Delta x$ 位于两点水平投影之间。}
+
+\TikzValidationFigure
+  {calc-02-riemann-area}
+  {把区间 $[a,b]$ 划分为若干小区间后，矩形面积和逼近曲线下方面积。}
+  {确认矩形底边位于 $[a,b]$ 内，上边大致贴近曲线，填充区域不越过坐标轴。}
+
+\TikzValidationFigure
+  {calc-03-polar-sector}
+  {扇环区域中的面积元可写作 $r\,\mathrm{d}r\,\mathrm{d}\theta$。}
+  {确认区域是扇环，小面积元位于区域内部，角向箭头沿逆时针方向，内外半径没有标反。}
+
+\section{普通物理}
+
+\TikzValidationFigure
+  {phys-01-projectile-motion}
+  {斜抛运动可分解为水平方向匀速运动和竖直方向匀变速运动。}
+  {确认轨迹先上升后下降，$v_{0x}$ 向右，$v_{0y}$ 向上，重力加速度 $g$ 全程向下。}
+
+\TikzValidationFigure
+  {phys-02-point-charge-field}
+  {正点电荷的电场方向沿径向向外。}
+  {确认电场线从中心向外发散，任意两条电场线不相交，等势圆保持辅助地位。}
+
+\TikzValidationFigure
+  {phys-03-inclined-plane-forces}
+  {斜面上物块的重力可分解为沿斜面与垂直斜面的两个分量。}
+  {确认 $mg$ 竖直向下，$N$ 垂直斜面，$f$ 沿斜面向上，分量箭头与斜面方向一致。}
+
+\section{线性代数}
+
+\TikzValidationFigure
+  {linalg-01-linear-transform-grid}
+  {线性变换由基向量的像决定，并把方格映为平行四边形网格。}
+  {确认右侧网格由两组平行线组成，$Ae_1$ 与 $Ae_2$ 不共线，变换箭头从左指向右。}
+
+\TikzValidationFigure
+  {linalg-02-projection-subspace}
+  {正交投影把向量分解为子空间方向和垂直方向两部分。}
+  {确认投影点落在 $L$ 上，残差向量垂直于 $L$，直角标记位于垂足处。}
+
+\TikzValidationFigure
+  {linalg-03-eigenvector-action}
+  {特征向量经过线性变换后仍在原来的直线上。}
+  {确认 $v$ 与 $Av$ 共线，$w$ 与 $Aw$ 不共线，特征直线穿过原点。}
+
+\end{document}

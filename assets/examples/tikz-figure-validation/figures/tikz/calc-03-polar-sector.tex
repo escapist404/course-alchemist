@@ -1,0 +1,33 @@
+\begin{tikzpicture}[>=Latex, scale=1.08]
+  \path[use as bounding box] (-1.05,-0.45) rectangle (3.65,3.35);
+  \coordinate (O) at (0,0);
+  \def\ra{1.15}
+  \def\rb{2.55}
+  \def\aa{24}
+  \def\bb{72}
+
+  \fill[CADef!15] (\aa:\ra) arc[start angle=\aa, end angle=\bb, radius=\ra]
+    -- (\bb:\rb) arc[start angle=\bb, end angle=\aa, radius=\rb] -- cycle;
+
+  \draw[CAInk!65, ->] (-0.2,0) -- (3.1,0);
+  \node[CAInk!65] at (3.28,-0.12) {$x$};
+  \draw[CAInk!65, ->] (0,-0.2) -- (0,2.9);
+  \node[CAInk!65] at (-0.12,3.08) {$y$};
+  \draw[CAInk!70] (O) -- (\aa:2.85) node[right] {$\theta=\alpha$};
+  \draw[CAInk!70] (O) -- (\bb:2.85) node[above] {$\theta=\beta$};
+  \draw[CADef, thick] (\aa:\ra) arc[start angle=\aa, end angle=\bb, radius=\ra];
+  \draw[CADef, thick] (\aa:\rb) arc[start angle=\aa, end angle=\bb, radius=\rb];
+
+  \fill[CAExam!30, draw=CAExam!80]
+    (43:1.72) -- (43:2.02) arc[start angle=43, end angle=51, radius=2.02]
+    -- (51:1.72) arc[start angle=51, end angle=43, radius=1.72] -- cycle;
+  \node[CAExam] at (47:1.47) {$dA$};
+
+  \draw[->, CADef, thick] (O) -- (45:2.25) node[pos=0.74, below right] {$r$};
+  \draw[->, CADef, thick] (0.68,0) arc[start angle=0, end angle=38, radius=0.68]
+    node[midway, right] {$\theta$};
+  \node[CADef!85!black, fill=white, inner sep=1pt] at (58:1.95) {$D$};
+  \draw[CADef!55] (60:1.15) -- (-0.14,1.22);
+  \node[CADef, fill=white, inner sep=1pt, anchor=east] at (-0.16,1.22) {$r_1$};
+  \node[CADef, fill=white, inner sep=1pt] at (55:2.72) {$r_2$};
+\end{tikzpicture}

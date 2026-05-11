@@ -1,0 +1,15 @@
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \path[use as bounding box] (-0.95,-0.65) rectangle (3.85,2.45);
+  \coordinate (O) at (0,0);
+  \coordinate (V) at (1.2,2.0);
+  \coordinate (P) at (1.76,0.88);
+
+  \draw[CAInk!55, thick] (-0.8,-0.4) -- (3.2,1.6) node[right] {$L$};
+  \draw[->, CADef, very thick] (O) -- (V) node[above] {$v$};
+  \draw[->, CAExam, very thick] (O) -- (P) node[pos=0.72, below right, fill=white, inner sep=1pt] {$\operatorname{proj}_L v$};
+  \draw[CAExam, dashed, thick] (P) -- (V);
+
+  \draw[CAInk!60] ($(P)+(-0.08,0.16)$) -- ($(P)+(0.08,0.24)$) -- ($(P)+(0.16,0.08)$);
+  \fill[CAExam] (P) circle (1.5pt);
+  \node[CAExam, fill=white, inner sep=1pt, anchor=west] at (2.08,1.55) {$v-\operatorname{proj}_L v$};
+\end{tikzpicture}

@@ -1,0 +1,234 @@
+{
+  "schema_version": "course-alchemist.figure-ir.v1",
+  "notes": "IR records the intended instructional semantics before TikZ generation. The validator checks source-level semantic evidence and records the remaining visual judgement for manual review.",
+  "figures": [
+    {
+      "id": "calc-01-derivative-tangent",
+      "domain": "calculus",
+      "purpose": "说明导数来自割线斜率趋近切线斜率。",
+      "entities": ["convex function curve", "point P", "point Q", "tangent line", "secant line", "horizontal Delta x"],
+      "required_semantics": [
+        {
+          "id": "points-pq",
+          "statement": "P 与 Q 是曲线上的两个被标记点。",
+          "evidence_all": ["coordinate \\(P\\)", "coordinate \\(Q\\)", "\\$P\\$", "\\$Q\\$"]
+        },
+        {
+          "id": "tangent-and-secant",
+          "statement": "图中同时区分切线和割线。",
+          "evidence_all": ["tangent", "secant"]
+        },
+        {
+          "id": "delta-x",
+          "statement": "水平投影之间标出 Delta x。",
+          "evidence_all": ["\\\\Delta x", "<->"]
+        }
+      ],
+      "forbidden_semantics": [
+        {
+          "id": "caption-wrapper",
+          "statement": "TikZ 片段不应含 figure/caption wrapper。",
+          "evidence_any": ["\\\\caption", "\\\\begin\\{figure\\}"]
+        }
+      ]
+    },
+    {
+      "id": "calc-02-riemann-area",
+      "domain": "calculus",
+      "purpose": "说明定积分近似为曲线下方小矩形面积之和。",
+      "entities": ["x-axis", "y-axis", "interval a b", "positive curve", "five rectangles", "filled area"],
+      "required_semantics": [
+        {
+          "id": "five-rectangles",
+          "statement": "图中使用五个等宽竖直矩形近似面积，矩形高度取左端点函数值。",
+          "evidence_all": ["\\\\foreach", "rectangle", "0\\.6/0\\.9122", "2\\.92/0\\.8676", "\\+\\+\\(0\\.58,\\\\h\\)"]
+        },
+        {
+          "id": "interval-labels",
+          "statement": "积分区间端点 a 与 b 在 x 轴上标出。",
+          "evidence_all": ["\\$a\\$", "\\$b\\$"]
+        },
+        {
+          "id": "area-meaning",
+          "statement": "图中用积分表达式标明曲线下面积。",
+          "evidence_all": ["\\\\int_a\\^b"]
+        }
+      ]
+    },
+    {
+      "id": "calc-03-polar-sector",
+      "domain": "calculus",
+      "purpose": "说明极坐标二重积分中的扇环区域及面积元方向。",
+      "entities": ["annular sector D", "inner radius r1", "outer radius r2", "alpha ray", "beta ray", "area element dA", "theta arrow"],
+      "required_semantics": [
+        {
+          "id": "annular-sector",
+          "statement": "区域由内外圆弧和两条射线构成。",
+          "evidence_all": ["arc\\[start angle=\\\\aa", "arc\\[start angle=\\\\bb", "\\\\theta=\\\\alpha", "\\\\theta=\\\\beta"]
+        },
+        {
+          "id": "area-element",
+          "statement": "小面积元 dA 位于扇环内部。",
+          "evidence_all": ["\\$dA\\$", "CAExam!30"]
+        },
+        {
+          "id": "polar-directions",
+          "statement": "图中标出径向 r 和角向 theta。",
+          "evidence_all": ["\\$r\\$", "\\$\\\\theta\\$"]
+        }
+      ]
+    },
+    {
+      "id": "phys-01-projectile-motion",
+      "domain": "general-physics",
+      "purpose": "说明斜抛运动中速度分解与重力方向。",
+      "entities": ["projectile trajectory", "initial velocity v0", "horizontal component v0x", "vertical component v0y", "downward gravity g", "ground"],
+      "required_semantics": [
+        {
+          "id": "parabolic-trajectory",
+          "statement": "轨迹是先上升后下降的抛物线。",
+          "evidence_all": ["domain=0:5\\.0", "0\\.92\\*\\\\x-0\\.18\\*\\\\x\\*\\\\x"]
+        },
+        {
+          "id": "velocity-components",
+          "statement": "初速度分解为水平向右和竖直向上的两个分量，v0 端点等于两个分量的向量和。",
+          "evidence_all": ["v_\\{0x\\}", "v_\\{0y\\}", "\\+\\+\\(1\\.35,1\\.10\\)", "\\+\\+\\(1\\.35,0\\)", "\\+\\+\\(0,1\\.1\\)", "\\(1\\.7,0\\) -- \\(1\\.7,1\\.10\\) -- \\(0\\.35,1\\.10\\)"]
+        },
+        {
+          "id": "gravity-downward",
+          "statement": "重力加速度 g 的箭头向下。",
+          "evidence_all": ["\\$g\\$", "\\+\\+\\(0,-0\\.55\\)"]
+        }
+      ],
+      "forbidden_semantics": [
+        {
+          "id": "gravity-upward",
+          "statement": "不应出现向上的 g 箭头。",
+          "evidence_any": ["\\$g\\$.*\\+\\+\\(0,0\\.55\\)"]
+        }
+      ]
+    },
+    {
+      "id": "phys-02-point-charge-field",
+      "domain": "general-physics",
+      "purpose": "说明正点电荷电场线沿径向向外。",
+      "entities": ["positive charge +q", "eight radial electric field lines", "outward arrows", "dashed equipotential circle"],
+      "required_semantics": [
+        {
+          "id": "positive-charge",
+          "statement": "中心标出正点电荷 +q。",
+          "evidence_all": ["\\+q", "circle \\(0\\.23\\)"]
+        },
+        {
+          "id": "radial-field-lines",
+          "statement": "8 条径向电场线从中心向外发散。",
+          "evidence_all": ["\\\\foreach \\\\ang in \\{0,45,\\.\\.\\.,315\\}", "\\\\draw\\[->, CADef, thick\\] \\(0,0\\) -- \\(\\\\ang:2\\.35\\)"]
+        },
+        {
+          "id": "equipotential-distinct",
+          "statement": "等势圆用虚线作为辅助，不与电场线混淆。",
+          "evidence_all": ["dashed", "circle \\(1\\.35\\)", "equipotential"]
+        }
+      ],
+      "forbidden_semantics": [
+        {
+          "id": "inward-field-lines",
+          "statement": "不应出现指向中心的电场线。",
+          "evidence_any": ["-- \\(0,0\\).*\\[->"]
+        }
+      ]
+    },
+    {
+      "id": "phys-03-inclined-plane-forces",
+      "domain": "general-physics",
+      "purpose": "说明斜面上物块的受力分解。",
+      "entities": ["inclined plane", "block", "weight mg", "normal force N", "friction f", "gravity components"],
+      "required_semantics": [
+        {
+          "id": "incline-angle",
+          "statement": "斜面和倾角 theta 被标出。",
+          "evidence_all": ["\\\\def\\\\ang\\{25\\}", "\\$\\\\theta\\$"]
+        },
+        {
+          "id": "force-directions",
+          "statement": "mg 竖直向下，N 垂直斜面，f 沿斜面向上。",
+          "evidence_all": ["\\$mg\\$", "\\+\\+\\(0,-1\\.35\\)", "\\$N\\$", "\\+\\+\\(115:1\\.0\\)", "\\$f\\$", "\\+\\+\\(\\\\ang:1\\.05\\)"]
+        },
+        {
+          "id": "gravity-components",
+          "statement": "重力沿斜面和垂直斜面的分量用虚线表示，方向分别平行和垂直于斜面，长度近似满足 sin/cos 比例。",
+          "evidence_all": ["mg\\\\sin\\\\theta", "mg\\\\cos\\\\theta", "dashed", "\\+\\+\\(205:0\\.57\\)", "\\+\\+\\(295:1\\.22\\)"]
+        }
+      ]
+    },
+    {
+      "id": "linalg-01-linear-transform-grid",
+      "domain": "linear-algebra",
+      "purpose": "说明线性变换把基向量和网格同时映到新方向。",
+      "entities": ["original grid", "transformed parallelogram grid", "basis e1 e2", "images Ae1 Ae2", "map arrow A"],
+      "required_semantics": [
+        {
+          "id": "original-and-transformed",
+          "statement": "图中区分 original 和 transformed 两侧。",
+          "evidence_all": ["original", "transformed"]
+        },
+        {
+          "id": "basis-images",
+          "statement": "原基向量和像向量均被标出。",
+          "evidence_all": ["\\$e_1\\$", "\\$e_2\\$", "Ae_1", "Ae_2"]
+        },
+        {
+          "id": "map-arrow",
+          "statement": "中间有从左到右的变换箭头 A。",
+          "evidence_all": ["\\$A\\$", "\\(2\\.65,0\\.5\\) -- \\(3\\.65,0\\.5\\)"]
+        }
+      ]
+    },
+    {
+      "id": "linalg-02-projection-subspace",
+      "domain": "linear-algebra",
+      "purpose": "说明向量到一维子空间的正交投影。",
+      "entities": ["line L", "vector v", "projection proj_L v", "orthogonal residual", "right angle mark"],
+      "required_semantics": [
+        {
+          "id": "line-and-vector",
+          "statement": "子空间直线 L 与原向量 v 被标出。",
+          "evidence_all": ["\\$L\\$", "\\$v\\$"]
+        },
+        {
+          "id": "projection",
+          "statement": "投影向量 proj_L v 落在 L 的方向上。",
+          "evidence_all": ["operatorname\\{proj\\}_L v", "\\(O\\) -- \\(P\\)"]
+        },
+        {
+          "id": "orthogonal-residual",
+          "statement": "残差和直角标记用于表达正交。",
+          "evidence_all": ["dashed", "v-\\\\operatorname\\{proj\\}_L v", "\\$\\(P\\)\\+\\(-0\\.08,0\\.16\\)\\$"]
+        }
+      ]
+    },
+    {
+      "id": "linalg-03-eigenvector-action",
+      "domain": "linear-algebra",
+      "purpose": "说明特征向量在线性变换下方向不变，只改变长度和可能改变方向。",
+      "entities": ["eigenvector v", "image Av lambda v", "non-eigenvector w", "image Aw", "eigenline", "map arrow A"],
+      "required_semantics": [
+        {
+          "id": "eigenline",
+          "statement": "特征直线穿过原点，并用虚线辅助表示。",
+          "evidence_all": ["dashed", "\\(-0\\.3,-0\\.15\\) -- \\(2\\.8,1\\.4\\)"]
+        },
+        {
+          "id": "eigenvector-collinear",
+          "statement": "v 与 Av=lambda v 共线。",
+          "evidence_all": ["\\$v\\$", "Av=\\\\lambda v", "\\(1\\.4,0\\.7\\)", "\\(2\\.4,1\\.2\\)"]
+        },
+        {
+          "id": "non-eigenvector-changes-direction",
+          "statement": "w 与 Aw 表示非特征向量改变方向。",
+          "evidence_all": ["\\$w\\$", "\\$Aw\\$", "\\(0\\.75,1\\.35\\)", "\\(1\\.55,0\\.35\\)"]
+        }
+      ]
+    }
+  ]
+}

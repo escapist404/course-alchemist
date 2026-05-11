@@ -1,0 +1,25 @@
+\begin{tikzpicture}[>=Latex, scale=1.0]
+  \path[use as bounding box] (-0.95,-0.62) rectangle (5.45,3.18);
+  \def\ang{25}
+  \coordinate (A) at (-0.4,0);
+  \coordinate (B) at (4.5,0);
+  \coordinate (C) at (4.5,2.28);
+  \fill[CAInk!8] (A) -- (B) -- (C) -- cycle;
+  \draw[CAInk!70, thick] (A) -- (C);
+  \draw[CAInk!50] (3.75,0) arc[start angle=0, end angle=\ang, radius=0.75]
+    node[midway, right] {$\theta$};
+
+  \begin{scope}[shift={(2.35,1.29)}, rotate=\ang]
+    \draw[fill=CADef!15, draw=CADef!75, thick] (-0.42,0) rectangle (0.42,0.48);
+  \end{scope}
+
+  \coordinate (M) at (2.35,1.48);
+  \draw[->, CAExam, very thick] (M) -- ++(0,-1.35) node[below] {$mg$};
+  \draw[->, CADef, very thick] (M) -- ++(115:1.0) node[pos=0.86, above left, fill=white, inner sep=1pt] {$N$};
+  \draw[->, CAExam, very thick] (M) -- ++(\ang:1.05) node[pos=0.82, above, fill=white, inner sep=1pt] {$f$};
+
+  \draw[->, CAExam!65, dashed] (M) -- ++(205:0.57);
+  \node[CAExam!75!black, fill=white, inner sep=1pt, anchor=east] at (1.55,1.35) {$mg\sin\theta$};
+  \draw[->, CAExam!65, dashed] (M) -- ++(295:1.22);
+  \node[CAExam!75!black, fill=white, inner sep=1pt, anchor=west] at (3.08,0.54) {$mg\cos\theta$};
+\end{tikzpicture}

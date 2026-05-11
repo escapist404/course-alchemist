@@ -1,0 +1,14 @@
+\begin{tikzpicture}[>=Latex, scale=1.05]
+  \path[use as bounding box] (-2.8,-2.8) rectangle (4.05,2.8);
+  \draw[CAInk!35, dashed] (0,0) circle (1.35);
+  \draw[CAInk!35] (1.26,-0.48) -- (1.92,-0.48);
+  \node[CAInk!55, fill=white, inner sep=1pt, anchor=west] at (1.96,-0.48) {equipotential};
+
+  \foreach \ang in {0,45,...,315} {
+    \draw[->, CADef, thick] (0,0) -- (\ang:2.35);
+  }
+
+  \fill[CAExam!18, draw=CAExam, thick] (0,0) circle (0.23);
+  \node[CAExam] at (0,0) {$+q$};
+  \node[CADef] at (2.0,1.45) {$\vec E$};
+\end{tikzpicture}
