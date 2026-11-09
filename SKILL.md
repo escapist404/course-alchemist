@@ -19,26 +19,7 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 
 ## Font Setup
 
-字体设置只在第一次安装 Skill 或第一次编译时执行，完成后不再重复检测、询问或下载，除非用户明确要求重新配置。
-
-- 模型先判断当前操作系统。
-- 根据操作系统选择合适的字体检测命令。
-- 检测以下六个字体：
-  - 思源宋体 / Noto Serif CJK SC
-  - 思源黑体 / Noto Sans CJK SC
-  - STIX Two Text
-  - STIX Two Math
-  - Libertinus Serif
-  - Libertinus Math
-- 如果所需字体已经存在，直接使用。
-- 如果缺少字体，立即停止当前编译流程。
-- 询问用户是否下载。
-- 用户拒绝时停止，不自动替换、不自动下载。
-- 用户同意时，调用 `assets/fonts/` 下的 Python 脚本。
-- 模型根据检测结果和用户选择，修改模板中的字体配置。
-- 模型修改字体配置时，只能修改 LaTeX 模板中明确标记为 `MODEL_EDIT_REQUIRED` 或“待模型修改”的字体配置注释块；不得修改模板中其他任何行。
-
-正式课程主题使用思源宋体、思源黑体、STIX Two Text 和 STIX Two Math。经典教材主题使用思源宋体、思源黑体、Libertinus Serif 和 Libertinus Math。
+字体设置只在第一次安装 Skill 或第一次编译时执行，完成后不再重复检测、询问或下载，除非用户明确要求重新配置。首次执行时按 `references/font-setup.md` 完成字体检测、用户确认与模板字体配置。
 
 ## Math Packages
 
@@ -67,7 +48,7 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 
 ## Mode Selection
 
-- 系统复习：生成完整讲义、知识关联、推导、典型例题和分层练习。
+- 系统复习：生成完整讲义、知识关联、推导、典型例题和分层练习，默认拆分为讲义正文与习题集两个 PDF。
 - 冲刺训练：压缩高频考点、公式方法、易错点、限时训练和模拟卷。
 - 题库模式：抽取、改编或生成题目，维护本地题库标签和完整解析。
 - 试卷模式：按分值、时间、题型比例、考点覆盖、难度比例和往年题风格组卷。
@@ -79,6 +60,9 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 
 - 讲义使用中文 `ctex`，默认以 `assets/templates/ctex-review-template.tex` 的版式和环境为起点。
 - 讲义正文默认采用中文专业教材式叙述：客观、克制、逻辑递进，避免聊天式、营销式、总结式和显露生成痕迹的表达。
+- 默认生成两个产物：讲义正文与习题集，各对应一个驱动文件和一个 PDF。用户可指定只出讲义、只出习题，或追加纯练习版、模拟卷等其他产物。
+- 讲义与习题集是同一份源的两套视图：章节正文、题面和解答分别存放在 `tex/chapters/`、`tex/problems/`、`tex/solutions/`，由不同驱动文件按需 `\input`，不得复制内容。
+- 习题集复用 `assets/templates/ctex-review-template.tex`，默认包含完整解答；需要不含解答的纯练习版时，通过驱动文件开关控制，不新增源文件。
 - 物理、多元微积分、线性代数等强空间直觉内容应主动判断是否需要图示；数学和物理标准示意图默认先尝试 TikZ/PGFPlots 片段，并通过 `scripts/validate_tikz_figures.py` 生成静态 SVG。
 - TikZ 片段放在课程项目的 `figures/tikz/`，验收后的 SVG 放在 `figures/svg/`，编译日志、wrapper、预览和报告放在 `build/tikz/`。
 - 生成 TikZ 前必须先写显式图示 IR，默认保存为 `source/figure-ir.json`；IR 应说明图的教学目的、视觉对象、必要语义关系、禁止关系和可检查证据。
@@ -97,6 +81,7 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 - `references/problem-bank.md`：建立题库、抽题、组卷、标注题目元数据时读取。
 - `references/source-processing.md`：处理 PDF、扫描件、PPT、题目照片、往年题、TikZ/SVG 图示生成或图像核对时读取。
 - `references/example-tasks.md`：需要判断典型请求应走哪种模式、输出什么、如何验收时读取。
+- `references/font-setup.md`：首次安装或首次编译、需要检测和配置讲义字体时读取。
 
 ## Quality Bar
 
