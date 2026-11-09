@@ -1,74 +1,18 @@
 \NeedsTeXFormat{LaTeX2e}
 
-% Pin the CJK fonts to the Windows ctexart defaults vendored in this repo.
-% This keeps the output stable across machines while matching Windows ctex.
 \RequirePackage{iftex}
 \ifPDFTeX
   \PackageError{course-alchemist-review}
     {This template requires XeLaTeX or LuaLaTeX}
-    {Use xelatex for the Windows ctexart-compatible font setup.}
+    {Use xelatex or lualatex with the selected font setup.}
 \fi
 \RequirePackage{fontspec}
 
-\newcommand{\CAWindowsCtexFontPath}{}
-\makeatletter
-\IfFileExists{assets/fonts/windows-ctex/simsun.ttc}
-  {\renewcommand{\CAWindowsCtexFontPath}{assets/fonts/windows-ctex/}}
-  {%
-    \IfFileExists{../fonts/windows-ctex/simsun.ttc}
-      {\renewcommand{\CAWindowsCtexFontPath}{../fonts/windows-ctex/}}
-      {%
-        \IfFileExists{../../../fonts/windows-ctex/simsun.ttc}
-          {\renewcommand{\CAWindowsCtexFontPath}{../../../fonts/windows-ctex/}}
-          {%
-            \IfFileExists{../../../../fonts/windows-ctex/simsun.ttc}
-              {\renewcommand{\CAWindowsCtexFontPath}{../../../../fonts/windows-ctex/}}
-              {%
-                \PackageError{course-alchemist-review}
-                  {Cannot find vendored Windows ctex fonts}
-                  {Expected simsun.ttc under assets/fonts/windows-ctex.}
-              }%
-          }%
-      }%
-  }
-\makeatother
-
-\setCJKmainfont[
-  Path=\CAWindowsCtexFontPath,
-  BoldFont=simhei.ttf,
-  ItalicFont=simkai.ttf
-]{simsun.ttc}
-\setCJKsansfont[
-  Path=\CAWindowsCtexFontPath,
-  BoldFont=msyhbd.ttc
-]{msyh.ttc}
-\setCJKmonofont[
-  Path=\CAWindowsCtexFontPath
-]{simfang.ttf}
-\setCJKfamilyfont{zhsong}[
-  Path=\CAWindowsCtexFontPath,
-  BoldFont=simhei.ttf,
-  ItalicFont=simkai.ttf
-]{simsun.ttc}
-\setCJKfamilyfont{zhhei}[
-  Path=\CAWindowsCtexFontPath
-]{simhei.ttf}
-\setCJKfamilyfont{zhfs}[
-  Path=\CAWindowsCtexFontPath
-]{simfang.ttf}
-\setCJKfamilyfont{zhkai}[
-  Path=\CAWindowsCtexFontPath
-]{simkai.ttf}
-\setCJKfamilyfont{zhyahei}[
-  Path=\CAWindowsCtexFontPath,
-  BoldFont=msyhbd.ttc
-]{msyh.ttc}
-\setCJKfamilyfont{zhli}[
-  Path=\CAWindowsCtexFontPath
-]{simli.ttf}
-\setCJKfamilyfont{zhyou}[
-  Path=\CAWindowsCtexFontPath
-]{simyou.ttf}
+% MODEL_EDIT_REQUIRED: FONT_CONFIGURATION_BEGIN
+% 待模型修改：根据操作系统检测结果和用户选择，在本注释块中填充
+% CJK 主字体、CJK 无衬线字体、西文字体和数学字体配置。
+% 模型只能修改本标记块，不能修改模板中的其他行。
+% MODEL_EDIT_REQUIRED: FONT_CONFIGURATION_END
 
 % Page and typography
 \RequirePackage[
