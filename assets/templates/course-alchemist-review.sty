@@ -99,8 +99,12 @@
   }
 }
 
+% Cross-referencing (must load after tcolorbox/hyperref, before theorem definitions)
+\RequirePackage{cleveref}
+
 \newtcbtheorem[number within=section]{definition}{定义}{
   ca-base,
+  crefname={定义}{定义},
   colback=CADef!5,
   colframe=CADef,
   colbacktitle=CADef!12
@@ -108,6 +112,7 @@
 
 \newtcbtheorem[number within=section]{theorem}{定理}{
   ca-base,
+  crefname={定理}{定理},
   colback=CAThm!5,
   colframe=CAThm,
   colbacktitle=CAThm!12
@@ -115,6 +120,7 @@
 
 \newtcbtheorem[number within=section]{lemma}{引理}{
   ca-base,
+  crefname={引理}{引理},
   colback=CALem!5,
   colframe=CALem,
   colbacktitle=CALem!12
@@ -122,6 +128,7 @@
 
 \newtcbtheorem[number within=section]{hint}{提示}{
   ca-base,
+  crefname={提示}{提示},
   colback=CAHint!5,
   colframe=CAHint,
   colbacktitle=CAHint!12
@@ -129,6 +136,7 @@
 
 \newtcbtheorem[number within=section]{examspot}{考点}{
   ca-base,
+  crefname={考点}{考点},
   colback=CAExam!7,
   colframe=CAExam,
   colbacktitle=CAExam!14
@@ -136,6 +144,7 @@
 
 \newtcbtheorem[number within=section]{pitfall}{易错点}{
   ca-base,
+  crefname={易错点}{易错点},
   colback=CAPitfall!5,
   colframe=CAPitfall,
   colbacktitle=CAPitfall!12
@@ -143,6 +152,7 @@
 
 \newtcbtheorem[number within=section]{attention}{关注}{
   ca-base,
+  crefname={关注}{关注},
   colback=CANote!6,
   colframe=CANote,
   colbacktitle=CANote!14
@@ -150,6 +160,7 @@
 
 \newtcbtheorem[number within=section]{method}{方法}{
   ca-base,
+  crefname={方法}{方法},
   colback=CAMethod!5,
   colframe=CAMethod,
   colbacktitle=CAMethod!12
@@ -157,6 +168,7 @@
 
 \newtcbtheorem[number within=section]{example}{例题}{
   ca-base,
+  crefname={例题}{例题},
   colback=CAExample!5,
   colframe=CAExample,
   colbacktitle=CAExample!12

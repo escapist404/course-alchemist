@@ -50,6 +50,13 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 - 矩阵、行列式、分块矩阵，以及需要省略线、分块、行列着色或节点引用的矩阵统一使用 `nicematrix`，配合其矩阵环境和 `\CodeAfter`、`\Block`、`\Cdots` 等接口，不要往普通矩阵环境里手插大量 `\node`。
 - 确需 `physics` 才能表达的功能改用替代方案：绝对值与范数用 `mathtools` 的 `\DeclarePairedDelimiter`，向量与算符用 `bm`，量子态用 `braket` 宏包。
 
+## Cross-References
+
+- 引用定义、定理、引理、例题、方法、易错点等教学单元时统一使用 `cleveref` 的 `\cref`，句首使用 `\Cref`，不得手写“定理 1.2”这类编号，也不得使用裸 `\ref`。
+- 多目标引用写成 `\cref{thm:a,thm:b}`，由 cleveref 排序合并；范围引用使用 `\crefrange`。
+- 公式引用仍使用 `\eqref`，不通过 `\cref`。
+- `cleveref` 的加载位置固定在 `tcolorbox` 之后、定理环境定义之前，不得调整；新增定理环境时必须同时给出 `crefname`。
+
 ## Bibliography
 
 - 需要参考文献时使用 `biblatex` + `biber`，风格固定为 `gb7714-2015`，不得使用 `bibtex` 或 `natbib`。
