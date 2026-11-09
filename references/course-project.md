@@ -25,6 +25,8 @@
 ├── source/
 │   └── figure-ir.json
 ├── problem_bank/
+├── bib/
+│   └── course.bib
 └── review_notes/
     ├── uncertainties.md
     ├── confusion-audit.md
@@ -138,3 +140,11 @@ review:
 5. 对新增或引用的图示做 TikZ/SVG 验证和人工核对；把无法确认的方向、标签遮挡、源图歧义写入 `review_notes/figure-audit.md`。
 6. 更新 `state.yml` 的进度、术语、符号、题库统计、困惑审计状态和待核对事项。
 7. 编译或做 LaTeX 结构检查，最终报告改动文件、验证结果、图像核对事项和困惑点覆盖结果。
+
+## Bibliography
+
+需要参考文献时使用 `biblatex` + `biber`，条目统一放在课程项目的 `bib/course.bib`，讲义、习题集和试卷共用同一份。
+
+- 编译顺序为 `xelatex → biber → xelatex → xelatex`。
+- 只有文档中出现 `\addbibresource` 时才需要执行 `biber` 步骤；没有参考文献的文档仍只编译两遍。
+- 只收录用户材料中真实存在或用户确认过的来源，不编造书目条目、页码或出版信息；无法确认的条目写入 `review_notes/source-audit.md`。

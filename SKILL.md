@@ -40,6 +40,24 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 
 正式课程主题使用思源宋体、思源黑体、STIX Two Text 和 STIX Two Math。经典教材主题使用思源宋体、思源黑体、Libertinus Serif 和 Libertinus Math。
 
+## Math Packages
+
+模板已加载的数学宏包是生成公式时的唯一来源，不得另行引入功能重叠的宏包。
+
+- 公式结构使用 `amsmath`、`mathtools`、`bm`。
+- 导数类记号统一使用 `derivative` 提供的 `\odv`、`\pdv`、`\fdv`、`\laplacian`，不要手写 `\frac{\mathrm{d}y}{\mathrm{d}x}`，也不得加载 `physics` 宏包。
+- 单位、数量、不确定度和科学计数法统一使用 `siunitx` 的 `\qty`、`\num`、`\unit`，表格中的数值对齐使用 `S` 列。
+- 矩阵、行列式、分块矩阵，以及需要省略线、分块、行列着色或节点引用的矩阵统一使用 `nicematrix`，配合其矩阵环境和 `\CodeAfter`、`\Block`、`\Cdots` 等接口，不要往普通矩阵环境里手插大量 `\node`。
+- 确需 `physics` 才能表达的功能改用替代方案：绝对值与范数用 `mathtools` 的 `\DeclarePairedDelimiter`，向量与算符用 `bm`，量子态用 `braket` 宏包。
+
+## Bibliography
+
+- 需要参考文献时使用 `biblatex` + `biber`，风格固定为 `gb7714-2015`，不得使用 `bibtex` 或 `natbib`。
+- 文献条目统一放在课程项目的 `bib/course.bib`，讲义、习题集和试卷共用同一份，保证编号体系一致。
+- 只在正文确实引用文献时，才在文档中启用 `\addbibresource` 和 `\printbibliography`，并执行 `biber` 步骤；没有参考文献的文档不得引入 `biber`。
+- 只收录用户材料中真实存在或用户确认过的来源，不得凭印象编造书目条目、作者、页码或出版信息。无法确认的条目写入 `review_notes/source-audit.md`。
+- 常见类型映射：教材用 `@book`，期刊论文用 `@article`，课件、讲义、往年题用 `@misc`，网页资料用 `@online` 并填写 `urldate`。
+
 ## Mode Selection
 
 - 系统复习：生成完整讲义、知识关联、推导、典型例题和分层练习。

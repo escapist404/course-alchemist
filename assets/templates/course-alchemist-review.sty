@@ -32,8 +32,11 @@
 
 % Math and diagrams
 \RequirePackage{amsmath,amssymb,mathtools,bm}
+\RequirePackage{siunitx}
+\RequirePackage{derivative}
 \RequirePackage{tikz}
 \usetikzlibrary{arrows.meta,calc,positioning,patterns,intersections,decorations.pathmorphing}
+\RequirePackage{nicematrix}
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
@@ -46,6 +49,10 @@
 \hypersetup{
   pdfauthor={Course Alchemist}
 }
+
+% Bibliography
+\RequirePackage{csquotes}
+\RequirePackage[backend=biber,style=gb7714-2015]{biblatex}
 
 % Header and footer
 \RequirePackage{fancyhdr}
@@ -168,7 +175,6 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
-\newcommand{\dd}{\,\mathrm{d}}
 
 % Document metadata helpers
 \newcommand{\CourseName}{课程名称}
