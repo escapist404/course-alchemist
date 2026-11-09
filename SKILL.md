@@ -19,30 +19,36 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 
 ## Font Setup
 
-字体设置只在第一次安装 Skill 或第一次编译时执行，完成后不再重复检测、询问或下载，除非用户明确要求重新配置。
+字体设置只在第一次安装 Skill 或第一次编译时执行，完成后不再重复检测、询问或下载，除非用户明确要求重新配置。首次执行时按 `references/font-setup.md` 完成字体检测、用户确认与模板字体配置。
 
-- 模型先判断当前操作系统。
-- 根据操作系统选择合适的字体检测命令。
-- 检测以下六个字体：
-  - 思源宋体 / Noto Serif CJK SC
-  - 思源黑体 / Noto Sans CJK SC
-  - STIX Two Text
-  - STIX Two Math
-  - Libertinus Serif
-  - Libertinus Math
-- 如果所需字体已经存在，直接使用。
-- 如果缺少字体，立即停止当前编译流程。
-- 询问用户是否下载。
-- 用户拒绝时停止，不自动替换、不自动下载。
-- 用户同意时，调用 `assets/fonts/` 下的 Python 脚本。
-- 模型根据检测结果和用户选择，修改模板中的字体配置。
-- 模型修改字体配置时，只能修改 LaTeX 模板中明确标记为 `MODEL_EDIT_REQUIRED` 或“待模型修改”的字体配置注释块；不得修改模板中其他任何行。
+## Math Packages
 
-正式课程主题使用思源宋体、思源黑体、STIX Two Text 和 STIX Two Math。经典教材主题使用思源宋体、思源黑体、Libertinus Serif 和 Libertinus Math。
+模板已加载的数学宏包是生成公式时的唯一来源，不得另行引入功能重叠的宏包。
+
+- 公式结构使用 `amsmath`、`mathtools`、`bm`。
+- 导数类记号统一使用 `derivative` 提供的 `\odv`、`\pdv`、`\fdv`、`\laplacian`，不要手写 `\frac{\mathrm{d}y}{\mathrm{d}x}`，也不得加载 `physics` 宏包。
+- 单位、数量、不确定度和科学计数法统一使用 `siunitx` 的 `\qty`、`\num`、`\unit`，表格中的数值对齐使用 `S` 列。
+- 矩阵、行列式、分块矩阵，以及需要省略线、分块、行列着色或节点引用的矩阵统一使用 `nicematrix`，配合其矩阵环境和 `\CodeAfter`、`\Block`、`\Cdots` 等接口，不要往普通矩阵环境里手插大量 `\node`。
+- 确需 `physics` 才能表达的功能改用替代方案：绝对值与范数用 `mathtools` 的 `\DeclarePairedDelimiter`，向量与算符用 `bm`，量子态用 `braket` 宏包。
+
+## Cross-References
+
+- 引用定义、定理、引理、例题、方法、易错点等教学单元时统一使用 `cleveref` 的 `\cref`，句首使用 `\Cref`，不得手写“定理 1.2”这类编号，也不得使用裸 `\ref`。
+- 多目标引用写成 `\cref{thm:a,thm:b}`，由 cleveref 排序合并；范围引用使用 `\crefrange`。
+- 公式引用仍使用 `\eqref`，不通过 `\cref`。
+- `cleveref` 的加载位置固定在 `tcolorbox` 之后、定理环境定义之前，不得调整；新增定理环境时必须同时给出 `crefname`。
+
+## Bibliography
+
+- 需要参考文献时使用 `biblatex` + `biber`，风格固定为 `gb7714-2015`，不得使用 `bibtex` 或 `natbib`。
+- 文献条目统一放在课程项目的 `bib/course.bib`，讲义、习题集和试卷共用同一份，保证编号体系一致。
+- 只在正文确实引用文献时，才在文档中启用 `\addbibresource` 和 `\printbibliography`，并执行 `biber` 步骤；没有参考文献的文档不得引入 `biber`。
+- 只收录用户材料中真实存在或用户确认过的来源，不得凭印象编造书目条目、作者、页码或出版信息。无法确认的条目写入 `review_notes/source-audit.md`。
+- 常见类型映射：教材用 `@book`，期刊论文用 `@article`，课件、讲义、往年题用 `@misc`，网页资料用 `@online` 并填写 `urldate`。
 
 ## Mode Selection
 
-- 系统复习：生成完整讲义、知识关联、推导、典型例题和分层练习。
+- 系统复习：生成完整讲义、知识关联、推导、典型例题和分层练习，默认拆分为讲义正文与习题集两个 PDF。
 - 冲刺训练：压缩高频考点、公式方法、易错点、限时训练和模拟卷。
 - 题库模式：抽取、改编或生成题目，维护本地题库标签和完整解析。
 - 试卷模式：按分值、时间、题型比例、考点覆盖、难度比例和往年题风格组卷。
@@ -54,6 +60,9 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 
 - 讲义使用中文 `ctex`，默认以 `assets/templates/ctex-review-template.tex` 的版式和环境为起点。
 - 讲义正文默认采用中文专业教材式叙述：客观、克制、逻辑递进，避免聊天式、营销式、总结式和显露生成痕迹的表达。
+- 默认生成两个产物：讲义正文与习题集，各对应一个驱动文件和一个 PDF。用户可指定只出讲义、只出习题，或追加纯练习版、模拟卷等其他产物。
+- 讲义与习题集是同一份源的两套视图：章节正文、题面和解答分别存放在 `tex/chapters/`、`tex/problems/`、`tex/solutions/`，由不同驱动文件按需 `\input`，不得复制内容。
+- 习题集复用 `assets/templates/ctex-review-template.tex`，默认包含完整解答；需要不含解答的纯练习版时，通过驱动文件开关控制，不新增源文件。
 - 物理、多元微积分、线性代数等强空间直觉内容应主动判断是否需要图示；数学和物理标准示意图默认先尝试 TikZ/PGFPlots 片段，并通过 `scripts/validate_tikz_figures.py` 生成静态 SVG。
 - TikZ 片段放在课程项目的 `figures/tikz/`，验收后的 SVG 放在 `figures/svg/`，编译日志、wrapper、预览和报告放在 `build/tikz/`。
 - 生成 TikZ 前必须先写显式图示 IR，默认保存为 `source/figure-ir.json`；IR 应说明图的教学目的、视觉对象、必要语义关系、禁止关系和可检查证据。
@@ -72,6 +81,7 @@ description: Transform STEM course materials such as scanned PDFs, slides, textb
 - `references/problem-bank.md`：建立题库、抽题、组卷、标注题目元数据时读取。
 - `references/source-processing.md`：处理 PDF、扫描件、PPT、题目照片、往年题、TikZ/SVG 图示生成或图像核对时读取。
 - `references/example-tasks.md`：需要判断典型请求应走哪种模式、输出什么、如何验收时读取。
+- `references/font-setup.md`：首次安装或首次编译、需要检测和配置讲义字体时读取。
 
 ## Quality Bar
 

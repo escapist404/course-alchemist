@@ -11,10 +11,11 @@
 ├── course.yml
 ├── state.yml
 ├── tex/
-│   ├── main.tex
+│   ├── main.tex          # 讲义正文驱动
+│   ├── exercises.tex     # 习题集驱动
 │   ├── chapters/
-│   ├── problems.tex
-│   ├── solutions.tex
+│   ├── problems/
+│   ├── solutions/
 │   └── exams/
 ├── figures/
 │   ├── tikz/
@@ -25,6 +26,8 @@
 ├── source/
 │   └── figure-ir.json
 ├── problem_bank/
+├── bib/
+│   └── course.bib
 └── review_notes/
     ├── uncertainties.md
     ├── confusion-audit.md
@@ -32,7 +35,7 @@
     └── source-audit.md
 ```
 
-一次性任务可以只生成 `main.tex`、`problems.tex`、`solutions.tex` 和 PDF；长期项目应保留 YAML 状态文件。
+一次性任务可以只生成 `main.tex`、`exercises.tex` 和对应 PDF；长期项目应保留 YAML 状态文件。
 
 ## course.yml
 
@@ -138,3 +141,22 @@ review:
 5. 对新增或引用的图示做 TikZ/SVG 验证和人工核对；把无法确认的方向、标签遮挡、源图歧义写入 `review_notes/figure-audit.md`。
 6. 更新 `state.yml` 的进度、术语、符号、题库统计、困惑审计状态和待核对事项。
 7. 编译或做 LaTeX 结构检查，最终报告改动文件、验证结果、图像核对事项和困惑点覆盖结果。
+
+## Outputs
+
+默认两个产物，各自从独立驱动文件编译：
+
+- `tex/main.tex`：讲义正文，只 `\input{chapters/...}`。
+- `tex/exercises.tex`：习题集，`\input{problems/...}`，并按开关决定是否追加对应的 `solutions/...`。
+- 两个驱动文件共用 `assets/templates/course-alchemist-review.sty`、`bib/course.bib` 和同一批章节源，保证术语、符号、编号一致。
+- 习题集复用 `assets/templates/ctex-review-template.tex`，默认包含完整解答；纯练习版通过驱动文件中的开关关闭解答部分，不新建源文件。
+- 跨文档引用（如习题中写“见定理 3.2”）只在各自 PDF 内有效，不承诺跨文件跳转。
+- 单独编译其中一份时，该文档需自带 `\addbibresource` 才执行 `biber` 步骤。
+
+## Bibliography
+
+需要参考文献时使用 `biblatex` + `biber`，条目统一放在课程项目的 `bib/course.bib`，讲义、习题集和试卷共用同一份。
+
+- 编译顺序为 `xelatex → biber → xelatex → xelatex`。
+- 只有文档中出现 `\addbibresource` 时才需要执行 `biber` 步骤；没有参考文献的文档仍只编译两遍。
+- 只收录用户材料中真实存在或用户确认过的来源，不编造书目条目、页码或出版信息；无法确认的条目写入 `review_notes/source-audit.md`。
